@@ -1,11 +1,10 @@
+import FlashcardsPage from "./Components/FlashcardsPage";
 
 const LandingPage = () => {
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">
-                Hello world!
-            </h1>
-        </div>
+        <>
+            <FlashcardsPage />
+        </>
     );
 };
 

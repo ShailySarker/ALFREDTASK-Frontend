@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/flashcards";
+const API_URL = "http://localhost:1800/api/flashcards";
 
 export const fetchFlashcards = createAsyncThunk("flashcards/fetchFlashcards", async (_, thunkAPI) => {
   try {

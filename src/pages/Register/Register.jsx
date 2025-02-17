@@ -44,9 +44,9 @@ const Register = () => {
             return;
         }
         if (password === confirmPassword) {
-            if (name && email && mobile && password && confirmPassword) {
+            if (name && email && password && confirmPassword) {
                 try {
-                    const newUser = { name, email, mobile, password };
+                    const newUser = { name, email, password };
                     await registerUser(dispatch, newUser);
                     alert("Registered Successfully!!")
 
@@ -66,37 +66,37 @@ const Register = () => {
             <div className="lg:w-[80%] lg:h-[80%] md:w-[70%] w-[90%] h-auto bg-white rounded-2xl shadow-xl flex items-center gap-20 lg:px-16 md:px-10 px-5">
                 <div className="lg:w-[55%] w-full lg:my-0 md:my-12 my-8">
                     <Link to="/">
-                        <h1 className="flex items-center gap-1 justify-center text-center xl:text-[32px] lg:text-[28px] md:text-xl text-lg font-semibold"><IoFlash />Flashcard</h1>
+                        <h1 className="text-black flex items-center gap-1 justify-center text-center xl:text-[32px] lg:text-[28px] md:text-xl text-lg font-semibold"><IoFlash />Flashcard</h1>
                     </Link >
                     <div className="md:mt-2 w-full">
                         <h4 className="xl:text-[24px] lg:text-[21.5px] md:text-lg font-semibold text-[#025195] text-center">Create your account</h4>
                         <form onSubmit={handleSignUp} className="flex flex-col xl:gap-2 lg:gap-[6px] gap-2 mt-5 w-full">
                             <div className="relative w-full flex items-center">
-                                <FaUser className="absolute left-4 xl:w-[21px] lg:w-[19px]" />
+                                <FaUser className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />
                                 <input type="text" className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="name" placeholder="Name" required />
                             </div>
                             <div className="relative w-full flex items-center">
-                                <FaEnvelope className="absolute left-4 xl:w-[21px] lg:w-[19px]" />
+                                <FaEnvelope className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />
                                 <input type="email" className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="email" placeholder="Email" required />
                             </div>
                             <div className="relative w-full flex items-center">
-                                <FaLock className="absolute left-4 xl:w-[21px] lg:w-[19px]" />
+                                <FaLock className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />
                                 <input type={passwordVisible ? 'text' : 'password'}
                                     className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="password" placeholder="Password" required />
                                 <button
                                     type="button"
-                                    className="absolute right-4"
+                                    className="absolute text-black right-4"
                                     onClick={togglePasswordVisibility}>
                                     {!passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
                                 </button>
                             </div>
                             <div className="relative w-full flex items-center">
-                                <FaLock className="absolute left-4 xl:w-[21px] lg:w-[19px]" />
+                                <FaLock className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />
                                 <input type={confirmPasswordVisible ? 'text' : 'password'}
                                     className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="confirmPassword" placeholder="Confirm Password" required />
                                 <button
                                     type="button"
-                                    className="absolute right-4"
+                                    className="absolute text-black right-4"
                                     onClick={toggleConfirmPasswordVisibility}>
                                     {!confirmPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
                                 </button>

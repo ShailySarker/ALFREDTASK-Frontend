@@ -1,39 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEnvelope, FaLock, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import banner from "../../assets/Image/Shared/Login_banner.png";
 import { IoFlash } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/apis/authCalls";
 const Login = () => {
     const dispatch = useDispatch();
+    const { currentUser, isFetching, loginError } = useSelector((state) => state?.user);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const [passwordVisible, setPasswordVisible] = useState(false);
     const togglePasswordVisibility = () => {
         setPasswordVisible((prev) => !prev);
     };
     const handleLogin = async (e) => {
         e.preventDefault();
-
-        const email = e?.target?.email?.value;
-        const password = e?.target?.password?.value;
-
+        const form = e?.target;
         const gmailRegex = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+        const email = form?.email?.value;
+        const password = form?.password?.value;
+
         if (!gmailRegex.test(email)) {
             alert("Email is not in the correct format!");
             return;
         }
         if (email && password) {
             try {
-                const newUser = { email, password };
-                // await registerUser(dispatch, newUser);
-                alert("Login Successfully!!")
-
-
+                await login(dispatch, { email, password });
+                // alert("Login Successfully!!")
             } catch (error) {
                 console.log('Error in sign-up:', error);
                 alert("Not able to Login!!")
             }
         }
     };
+
+    useEffect(() => {
+        if (currentUser) {
+            if (currentUser?.accessToken) {
+                localStorage.setItem('token', currentUser?.accessToken); // Store token
+                navigate(from, { replace: true });
+                alert("Login Successfully!!")
+            } else {
+                alert("Access token not found!");
+            }
+        } else if (loginError) {
+            alert(loginError);
+        }
+    }, [currentUser, loginError, from, navigate, dispatch]);
+
 
     return (
         <div className="bg-slate-200 h-screen flex items-center justify-center">

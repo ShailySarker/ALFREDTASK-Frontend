@@ -1,15 +1,26 @@
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../redux/slices/authSlice";
+import { logout } from "../redux/slices/userSlice";
 import DarkModeToggle from "./DarkModeToggle";
 import { Link } from "react-router";
 import { IoFlash } from "react-icons/io5";
-import { useState } from "react";
+import { logOut } from "../redux/apis/authCalls";
 
 const Header = () => {
-    const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    
+    const userAvailability = useSelector(state => state?.user?.currentUser !== null);
+    const userInfo = useSelector(state => state?.user?.currentUser);
 
+    // handle logout
+    const handleLogout = async () => {
+        try {
+            logOut(dispatch);
+            window.location.reload(true);
+            alert("Logout successfully!");
+        } catch (error) {
+            console.error('Logout failed:', error);
+            alert("Logout failed!");
+        }
+    };
 
     return (
         <nav className="flex justify-between items-center xl:px-24 lg:px-16 md:px-10 px-5 xl:py-5 lg:py-[14px] md:py-4 py-[14px] shadow-md">
@@ -19,10 +30,10 @@ const Header = () => {
             <div className="flex items-center lg:gap-4 md:gap-3 gap-2">
                 <DarkModeToggle />
 
-                {user ? (
+                {userAvailability ? (
                     <div className="flex items-center">
-                        <span className="text-sm">{user?.name}</span>
-                        <button className="xl:py-[9px] lg:py-2 py-[6px] bg-red-500 text-white shadow-lg font-medium rounded-xl md:w-24 w-20 text-center" onClick={() => dispatch(logout())}>
+                        {/* <span className="text-sm">{userInfo && userInfo?.fullname}</span> */}
+                        <button onClick={handleLogout} className="xl:py-[9px] lg:py-2 py-[6px] bg-red-600 text-white shadow-lg font-medium rounded-xl md:w-24 w-20 text-center">
                             Logout
                         </button>
                     </div>

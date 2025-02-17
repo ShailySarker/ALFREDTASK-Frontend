@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { FaEnvelope, FaLock, FaRegEye, FaRegEyeSlash, FaUser } from "react-icons/fa6";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import banner from "../../assets/Image/Shared/Register_banner.png";
 import { IoFlash } from "react-icons/io5";
-import { registerUser } from "../../redux/slices/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../redux/apis/authCalls";
 const Register = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { isFetching, signUpError } = useSelector((state) => state?.user);
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
     const togglePasswordVisibility = () => {
@@ -17,10 +19,21 @@ const Register = () => {
     };
     const handleSignUp = async (e) => {
         e.preventDefault();
-        const name = e?.target?.name?.value;
-        const email = e?.target?.email?.value;
-        const password = e?.target?.password?.value;
-        const confirmPassword = e?.target?.confirmPassword?.value;
+        const form = e?.target;
+        const fullname = form?.fullname?.value;
+        const email = form?.email?.value;
+        const password = form?.password?.value;
+        const confirmPassword = form?.confirmPassword?.value;
+
+        // validation
+        if (fullname?.length < 3) {
+            alert("Username should have at least 3 characters !");
+            return;
+        }
+        if (fullname?.length > 15) {
+            alert("Username should have a maximum of 15 characters !");
+            return;
+        }
 
         const gmailRegex = /^[a-zA-Z0-9._-]+@gmail\.com$/;
         if (!gmailRegex.test(email)) {
@@ -44,13 +57,18 @@ const Register = () => {
             return;
         }
         if (password === confirmPassword) {
-            if (name && email && password && confirmPassword) {
+            if (fullname && email && password && confirmPassword) {
                 try {
-                    const newUser = { name, email, password };
-                    await registerUser(dispatch, newUser);
-                    alert("Registered Successfully!!")
+                    const newUser = { fullname, email, password };
+                    await signUp(dispatch, newUser);
 
-
+                    if (!signUpError) {
+                        alert("Registration is Successfully!!")
+                        form.reset();
+                        navigate('/login');
+                    } else {
+                        alert("Registration is failed!!")
+                    }
                 } catch (error) {
                     console.log('Error in sign-up:', error);
                     alert("Not able to Register!!")
@@ -73,7 +91,7 @@ const Register = () => {
                         <form onSubmit={handleSignUp} className="flex flex-col xl:gap-2 lg:gap-[6px] gap-2 mt-5 w-full">
                             <div className="relative w-full flex items-center">
                                 <FaUser className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />
-                                <input type="text" className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="name" placeholder="Name" required />
+                                <input type="text" className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="fullname" placeholder="Full Name" required />
                             </div>
                             <div className="relative w-full flex items-center">
                                 <FaEnvelope className="absolute text-black left-4 xl:w-[21px] lg:w-[19px]" />

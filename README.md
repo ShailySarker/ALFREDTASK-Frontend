@@ -1,4 +1,5 @@
 📌📌
+
 Project Name: Flashcard Learning App
 
 Website Link: https://flashcard-learning-app-frontend.vercel.app/
@@ -40,7 +41,7 @@ answered correctly)
 
 ✅ # Run 
 # Clone this repository
-$ git clone https://https://github.com/ShailySarker/Flashcard-Learning-App-Frontend
+$ git clone https://github.com/ShailySarker/ALFREDTASK-Frontend 
 
 # Go into the repository
 $ cd Flashcard-Learning-App-Frontend

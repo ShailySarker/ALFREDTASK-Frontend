@@ -15,7 +15,7 @@ export const signUp = async (dispatch, user) => {
     dispatch(signUpStart());
     try {
         const res = await publicRequest.post("/auth/signUp", user);
-        localStorage.setItem("user", JSON.stringify(res?.data)); // Save user info to localStorage
+        localStorage.setItem("user", JSON.stringify(res?.data));
         dispatch(signUpSuccess(res?.data));
     } catch (error) {
         const errorMsg = error.response?.data?.message || "Sign up failed";

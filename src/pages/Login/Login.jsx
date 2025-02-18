@@ -73,7 +73,7 @@ const Login = () => {
                                     className="w-full bg-[#FCFCFC] border-[1px] xl:py-[9px] lg:py-2 py-[6px] pl-12 pr-6 border-[#EFEEEE] rounded-xl placeholder:text-[#546879] placeholder:text-[13px] placeholder:font-medium" name="password" placeholder="Password" required />
                                 <button
                                     type="button"
-                                    className="absolute right-4"
+                                    className="absolute right-4 text-black "
                                     onClick={togglePasswordVisibility}>
                                     {!passwordVisible ? <FaRegEyeSlash /> : <FaRegEye />}
                                 </button>

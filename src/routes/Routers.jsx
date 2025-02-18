@@ -3,6 +3,7 @@ import MainLayouts from '../layouts/MainLayouts';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
+import PrivateRouter from './PrivateRouter';
 
 const Routers = () => {
     return (
@@ -12,9 +13,10 @@ const Routers = () => {
                 element={<MainLayouts />}
             >
                 <Route
-                    // path="/"
                     index
-                    element={<LandingPage />}
+                    element={<PrivateRouter>
+                        <LandingPage />
+                    </PrivateRouter>}
                 />
             </Route>
             <Route

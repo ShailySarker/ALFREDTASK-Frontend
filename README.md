@@ -1,7 +1,9 @@
+📌📌
 Project Name: Flashcard Learning App
+
 Website Link: https://flashcard-learning-app-frontend.vercel.app/
 Description: 
-📌 Task: Build a Flashcard Learning App with Leitner System
+Task: Build a Flashcard Learning App with Leitner System
 Objective: Create a web app where users can create, review, and progress through
 flashcards using the Leitner System.
 
@@ -35,3 +37,16 @@ answered correctly)
 🔹 Dark Mode Toggle – Better UX for late-night study sessions
 🔹 Animations (Framer Motion) – Smooth transitions when answering flashcards
 🔹 Deploy on Vercel/Render – Bonus points for making it live
+
+✅ Run 
+# Clone this repository
+$ git clone https://https://github.com/ShailySarker/Flashcard-Learning-App-Frontend
+
+# Go into the repository
+$ cd Flashcard-Learning-App-Frontend
+
+# Install dependencies
+$ npm install
+
+# Run the app
+$ npm start
